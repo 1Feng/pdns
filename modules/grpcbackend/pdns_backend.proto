@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package pdnsbackend;
+
+service BackEnd {
+  rpc LookUp(DNSLookupMessage) returns (DNSReply) {}
+}
+
+message DNSLookupMessage {
+  string qtype = 1;
+  string qname = 2;
+  string remote = 3;
+  string local = 4;
+  string real_remote = 5;
+  int32 zone_id = 6;
+}
+
+message DNSReplyRecord {
+  string qtype = 1;
+  string qname = 2;
+  string content = 3;
+  int32 ttl = 4;
+}
+
+message DNSReply {
+  bool result = 1;
+  repeated DNSReplyRecord record = 2;
+}

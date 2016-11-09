@@ -220,6 +220,9 @@ for a in $modules $dynmodules; do
     tinydns)
       PDNS_CHECK_CDB
       ;;
+    grpc)
+      PDNS_CHECK_GRPC
+      ;;
     geoip)
       PDNS_CHECK_GEOIP
       ;;
@@ -329,6 +332,7 @@ AC_CONFIG_FILES([
   modules/randombackend/Makefile
   modules/remotebackend/Makefile
   modules/tinydnsbackend/Makefile
+  modules/grpcbackend/Makefile
 ])
 AC_OUTPUT
 
