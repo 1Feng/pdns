@@ -19,7 +19,7 @@ Based on pdns rec-4.0.3
   $ ./bootstrap
   $ ./configure --with-modules="grpc" 
   $ make
- # make install
+  $ make install
  ```
 
 **pdns.conf**
