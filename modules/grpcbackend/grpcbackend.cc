@@ -60,6 +60,7 @@ void GrpcBackend::lookup(const QType &qtype, const DNSName& qdomain, DNSPacket *
     rr.qclass = QClass::IN;
     rr.content = record.content();
     rr.ttl = record.ttl();
+    rr.domain_id = record.domain_id();
     rrs_.push_back(rr);
   }
 

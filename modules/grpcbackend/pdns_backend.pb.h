@@ -283,6 +283,12 @@ class DNSReplyRecord : public ::google::protobuf::Message /* @@protoc_insertion_
   ::google::protobuf::int32 ttl() const;
   void set_ttl(::google::protobuf::int32 value);
 
+  // optional int32 domain_id = 5;
+  void clear_domain_id();
+  static const int kDomainIdFieldNumber = 5;
+  ::google::protobuf::int32 domain_id() const;
+  void set_domain_id(::google::protobuf::int32 value);
+
   // @@protoc_insertion_point(class_scope:pdnsbackend.DNSReplyRecord)
  private:
 
@@ -292,6 +298,7 @@ class DNSReplyRecord : public ::google::protobuf::Message /* @@protoc_insertion_
   ::google::protobuf::internal::ArenaStringPtr qname_;
   ::google::protobuf::internal::ArenaStringPtr content_;
   ::google::protobuf::int32 ttl_;
+  ::google::protobuf::int32 domain_id_;
   mutable int _cached_size_;
   friend void  protobuf_AddDesc_pdns_5fbackend_2eproto();
   friend void protobuf_AssignDesc_pdns_5fbackend_2eproto();
@@ -785,6 +792,20 @@ inline void DNSReplyRecord::set_ttl(::google::protobuf::int32 value) {
   
   ttl_ = value;
   // @@protoc_insertion_point(field_set:pdnsbackend.DNSReplyRecord.ttl)
+}
+
+// optional int32 domain_id = 5;
+inline void DNSReplyRecord::clear_domain_id() {
+  domain_id_ = 0;
+}
+inline ::google::protobuf::int32 DNSReplyRecord::domain_id() const {
+  // @@protoc_insertion_point(field_get:pdnsbackend.DNSReplyRecord.domain_id)
+  return domain_id_;
+}
+inline void DNSReplyRecord::set_domain_id(::google::protobuf::int32 value) {
+  
+  domain_id_ = value;
+  // @@protoc_insertion_point(field_set:pdnsbackend.DNSReplyRecord.domain_id)
 }
 
 // -------------------------------------------------------------------

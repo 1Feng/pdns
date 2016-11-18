@@ -20,6 +20,7 @@ message DNSReplyRecord {
   string qname = 2;
   string content = 3;
   int32 ttl = 4;
+  int32 domain_id = 5;
 }
 
 message DNSReply {

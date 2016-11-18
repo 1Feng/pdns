@@ -62,11 +62,12 @@ void protobuf_AssignDesc_pdns_5fbackend_2eproto() {
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DNSLookupMessage, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DNSLookupMessage, _is_default_instance_));
   DNSReplyRecord_descriptor_ = file->message_type(1);
-  static const int DNSReplyRecord_offsets_[4] = {
+  static const int DNSReplyRecord_offsets_[5] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DNSReplyRecord, qtype_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DNSReplyRecord, qname_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DNSReplyRecord, content_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DNSReplyRecord, ttl_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DNSReplyRecord, domain_id_),
   };
   DNSReplyRecord_reflection_ =
     ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
@@ -138,13 +139,14 @@ void protobuf_AddDesc_pdns_5fbackend_2eproto() {
     "\n\022pdns_backend.proto\022\013pdnsbackend\"u\n\020DNS"
     "LookupMessage\022\r\n\005qtype\030\001 \001(\t\022\r\n\005qname\030\002 "
     "\001(\t\022\016\n\006remote\030\003 \001(\t\022\r\n\005local\030\004 \001(\t\022\023\n\013re"
-    "al_remote\030\005 \001(\t\022\017\n\007zone_id\030\006 \001(\005\"L\n\016DNSR"
+    "al_remote\030\005 \001(\t\022\017\n\007zone_id\030\006 \001(\005\"_\n\016DNSR"
     "eplyRecord\022\r\n\005qtype\030\001 \001(\t\022\r\n\005qname\030\002 \001(\t"
-    "\022\017\n\007content\030\003 \001(\t\022\013\n\003ttl\030\004 \001(\005\"G\n\010DNSRep"
-    "ly\022\016\n\006result\030\001 \001(\010\022+\n\006record\030\002 \003(\0132\033.pdn"
-    "sbackend.DNSReplyRecord2K\n\007BackEnd\022@\n\006Lo"
-    "okUp\022\035.pdnsbackend.DNSLookupMessage\032\025.pd"
-    "nsbackend.DNSReply\"\000b\006proto3", 388);
+    "\022\017\n\007content\030\003 \001(\t\022\013\n\003ttl\030\004 \001(\005\022\021\n\tdomain"
+    "_id\030\005 \001(\005\"G\n\010DNSReply\022\016\n\006result\030\001 \001(\010\022+\n"
+    "\006record\030\002 \003(\0132\033.pdnsbackend.DNSReplyReco"
+    "rd2K\n\007BackEnd\022@\n\006LookUp\022\035.pdnsbackend.DN"
+    "SLookupMessage\032\025.pdnsbackend.DNSReply\"\000b"
+    "\006proto3", 407);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "pdns_backend.proto", &protobuf_RegisterTypes);
   DNSLookupMessage::default_instance_ = new DNSLookupMessage();
@@ -899,6 +901,7 @@ const int DNSReplyRecord::kQtypeFieldNumber;
 const int DNSReplyRecord::kQnameFieldNumber;
 const int DNSReplyRecord::kContentFieldNumber;
 const int DNSReplyRecord::kTtlFieldNumber;
+const int DNSReplyRecord::kDomainIdFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 DNSReplyRecord::DNSReplyRecord()
@@ -927,6 +930,7 @@ void DNSReplyRecord::SharedCtor() {
   qname_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   content_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ttl_ = 0;
+  domain_id_ = 0;
 }
 
 DNSReplyRecord::~DNSReplyRecord() {
@@ -969,10 +973,30 @@ DNSReplyRecord* DNSReplyRecord::New(::google::protobuf::Arena* arena) const {
 
 void DNSReplyRecord::Clear() {
 // @@protoc_insertion_point(message_clear_start:pdnsbackend.DNSReplyRecord)
+#if defined(__clang__)
+#define ZR_HELPER_(f) \
+  _Pragma("clang diagnostic push") \
+  _Pragma("clang diagnostic ignored \"-Winvalid-offsetof\"") \
+  __builtin_offsetof(DNSReplyRecord, f) \
+  _Pragma("clang diagnostic pop")
+#else
+#define ZR_HELPER_(f) reinterpret_cast<char*>(\
+  &reinterpret_cast<DNSReplyRecord*>(16)->f)
+#endif
+
+#define ZR_(first, last) do {\
+  ::memset(&first, 0,\
+           ZR_HELPER_(last) - ZR_HELPER_(first) + sizeof(last));\
+} while (0)
+
+  ZR_(ttl_, domain_id_);
   qtype_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   qname_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   content_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  ttl_ = 0;
+
+#undef ZR_HELPER_
+#undef ZR_
+
 }
 
 bool DNSReplyRecord::MergePartialFromCodedStream(
@@ -1046,6 +1070,21 @@ bool DNSReplyRecord::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
+        if (input->ExpectTag(40)) goto parse_domain_id;
+        break;
+      }
+
+      // optional int32 domain_id = 5;
+      case 5: {
+        if (tag == 40) {
+         parse_domain_id:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &domain_id_)));
+
+        } else {
+          goto handle_unusual;
+        }
         if (input->ExpectAtEnd()) goto success;
         break;
       }
@@ -1109,6 +1148,11 @@ void DNSReplyRecord::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(4, this->ttl(), output);
   }
 
+  // optional int32 domain_id = 5;
+  if (this->domain_id() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(5, this->domain_id(), output);
+  }
+
   // @@protoc_insertion_point(serialize_end:pdnsbackend.DNSReplyRecord)
 }
 
@@ -1153,6 +1197,11 @@ void DNSReplyRecord::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(4, this->ttl(), target);
   }
 
+  // optional int32 domain_id = 5;
+  if (this->domain_id() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(5, this->domain_id(), target);
+  }
+
   // @@protoc_insertion_point(serialize_to_array_end:pdnsbackend.DNSReplyRecord)
   return target;
 }
@@ -1187,6 +1236,13 @@ int DNSReplyRecord::ByteSize() const {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::Int32Size(
         this->ttl());
+  }
+
+  // optional int32 domain_id = 5;
+  if (this->domain_id() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->domain_id());
   }
 
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
@@ -1232,6 +1288,9 @@ void DNSReplyRecord::MergeFrom(const DNSReplyRecord& from) {
   if (from.ttl() != 0) {
     set_ttl(from.ttl());
   }
+  if (from.domain_id() != 0) {
+    set_domain_id(from.domain_id());
+  }
 }
 
 void DNSReplyRecord::CopyFrom(const ::google::protobuf::Message& from) {
@@ -1262,6 +1321,7 @@ void DNSReplyRecord::InternalSwap(DNSReplyRecord* other) {
   qname_.Swap(&other->qname_);
   content_.Swap(&other->content_);
   std::swap(ttl_, other->ttl_);
+  std::swap(domain_id_, other->domain_id_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   std::swap(_cached_size_, other->_cached_size_);
 }
@@ -1421,6 +1481,20 @@ void DNSReplyRecord::clear_ttl() {
   
   ttl_ = value;
   // @@protoc_insertion_point(field_set:pdnsbackend.DNSReplyRecord.ttl)
+}
+
+// optional int32 domain_id = 5;
+void DNSReplyRecord::clear_domain_id() {
+  domain_id_ = 0;
+}
+ ::google::protobuf::int32 DNSReplyRecord::domain_id() const {
+  // @@protoc_insertion_point(field_get:pdnsbackend.DNSReplyRecord.domain_id)
+  return domain_id_;
+}
+ void DNSReplyRecord::set_domain_id(::google::protobuf::int32 value) {
+  
+  domain_id_ = value;
+  // @@protoc_insertion_point(field_set:pdnsbackend.DNSReplyRecord.domain_id)
 }
 
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS

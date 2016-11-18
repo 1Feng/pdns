@@ -325,7 +325,7 @@ bool UeberBackend::getAuth(DNSPacket *p, SOAData *sd, const DNSName &target)
         DLOG(L<<Logger::Error<<"add pos cache entry: "<<sd->qname<<endl);
         d_question.qtype = QType::SOA;
         d_question.qname = sd->qname;
-        d_question.zoneId = -1;
+        d_question.zoneId = sd->domain_id;
 
         DNSResourceRecord rr;
         rr.qname = sd->qname;
