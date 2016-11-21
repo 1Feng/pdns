@@ -17,7 +17,7 @@ Based on pdns rec-4.0.3
 
  ```
   $ ./bootstrap
-  $ ./configure --with-modules="grpc" 
+  $ ./configure --with-modules="grpc"
   $ make
   $ make install
  ```
@@ -30,3 +30,7 @@ grpc-connection-string=localhost:50051
 
 lannch=grpc
 ```
+#### Change List:
+- 1. support grpc backend
+- 2. disable TCPv6 socket bind
+- 3. update query cache key with zoneId(or domain_id, it's the same), reduce queries for backend
