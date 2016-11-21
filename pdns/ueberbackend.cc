@@ -259,7 +259,7 @@ bool UeberBackend::getAuth(DNSPacket *p, SOAData *sd, const DNSName &target)
     if(sd->db != (DNSBackend *)-1 && (d_cache_ttl || d_negcache_ttl)) {
       d_question.qtype = QType::SOA;
       d_question.qname = choppedOff;
-      d_question.zoneId = -1;
+      d_question.zoneId = sd->domain_id;
 
       cstat = cacheHas(d_question,d_answers);
 
